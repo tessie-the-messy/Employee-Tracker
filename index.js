@@ -54,7 +54,7 @@ inquirer.prompt ( [
             }
         ])
         .then(deptdata => {
-            db.query(`INSERT INTO department(dept_name)values ("${deptdata.newRole}")`, (err, res) => {
+            db.query(`INSERT INTO department(dept_name)values ("${deptdata.newDept}")`, (err, res) => {
                 console.table(res)
                 if (err) throw err
             })
@@ -67,12 +67,25 @@ inquirer.prompt ( [
                 type: "input",
                 message: "What's the role name?",
                 name: "newRole"
+            },
+            {
+                type: "input",
+                message: "What department id?",
+                name: "deptId"
+            },
+            {
+                type: "input",
+                message: "What is the salary (please use decimals)?",
+                name: "salary"
             }
         ])
         .then(roledata => {
-            db.query(`INSERT INTO role(title)values ("${roledata.newRole}")`, (err, res) => {
+            db.query(`INSERT INTO role(title, salary, department_id)values ("${roledata.newRole}", ${roledata.salary}, ${roledata.deptId})`, (err, res) => {
                 console.table(res)
-                if (err) throw err
+                if (err) {
+                    console.log(err)
+                    throw err
+            }
             })
             return appStart()
         })
@@ -91,18 +104,46 @@ inquirer.prompt ( [
             },
             {
                 type: "input",
+                message: "What's the employee's role ID? (Please enter a number)",
+                name: "newEmpRole"
+            },
+            {
+                type: "input",
                 message: "What's the employee's manager ID? (Please enter a number)",
                 name: "newEmpManager"
             }
 
         ])
         .then(empdata => {
-            db.query(`INSERT INTO employee(title)values ("${roledata.newRole}")`, (err, res) => {
+            db.query(`INSERT INTO employee(first_name, last_name, role_id, manager_id)values ("${empdata.newEmpName}", "${empdata.newEmpLName}", ${empdata.newEmpRole}, ${empdata.newEmpManager})`, (err, res) => {
                 console.table(res)
                 if (err) throw err
             })
             return appStart()
         })
+    }
+    else if (data.todo === "Update an Employee Role"){
+        inquirer.prompt([
+            {
+                type: "input",
+                message: "What's the employees name?",
+                name: "empName"
+            },
+            {
+                type: "input",
+                message: "What is their new role id?",
+                name: "roleId"
+            }
+        ]).then(empRoleData => {
+            db.query(`UPDATE employee set role_id = ${empRoleData.roleId} where first_name = "${empRoleData.empName}"`, (err, res) => {
+                console.table(res)
+                if (err) throw err
+            })
+            return appStart()
+        })
+    }
+    else if (data.todo === "Quit"){
+        return
     }
 })
 }
