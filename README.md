@@ -17,6 +17,9 @@
 
   ## Usage
   #### Uses MySQL database. 
+  
+  Check out this video example of the CMS running: [Untitled_ Jan 20, 2023 9_16 PM.webm](https://user-images.githubusercontent.com/115903135/213843625-ac895262-fec5-4b7e-bd1c-2b0bff270795.webm)
+
 
   ## License: MIT license
   #### For more information visit https://opensource.org/licenses/MIT
