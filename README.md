@@ -2,7 +2,7 @@
   ![License](https://img.shields.io/badge/license-MIT-brightgreen)
 
   ## Description
-   ### Content Management system for business database. Allows users to view and manage list of departments, roles, and employees.
+  Content Management system for business database. Allows users to view and manage list of departments, roles, and employees.
     
   ## Table of Contents
   ### - [Installation](#installation)
